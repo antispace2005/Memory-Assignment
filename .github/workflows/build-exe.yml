@@ -35,3 +35,12 @@ jobs:
         with:
           name: MemoryAllocationSegmentation-windows-exe
           path: dist/MemoryAllocationSegmentation.exe
+
+      - name: Update Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/MemoryAllocationSegmentation.exe
+          tag_name: latest
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

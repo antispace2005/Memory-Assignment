@@ -18,6 +18,9 @@ PROJECT_REPORT.toc
 # Generated screenshots
 screenshots/
 
+# Test case files
+testcases.txt
+
 # PyInstaller build outputs
 dist/
 build/
