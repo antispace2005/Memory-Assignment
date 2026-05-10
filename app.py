@@ -8,7 +8,11 @@ from typing import List, Optional, Tuple
 from PyQt6 import uic
 from PyQt6.QtCore import Qt, QRectF, QSize
 from PyQt6.QtGui import QAction, QColor, QFont, QPainter, QPen, QBrush
-from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QTableWidgetItem
+from PyQt6.QtWidgets import (
+    QApplication, QMainWindow, QWidget, QTableWidgetItem, QDialog,
+    QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QSpinBox,
+    QPushButton, QTableWidget, QMessageBox, QAbstractItemView
+)
 
 
 class AllocationMethod(str, Enum):
@@ -198,6 +202,176 @@ class MemoryCanvas(QWidget):
         return QColor.fromHsv(digest % 360, 130, 210)
 
 
+class NewSimulationDialog(QDialog):
+    def __init__(self, parent=None) -> None:
+        super().__init__(parent)
+        self.setWindowTitle("New Simulation")
+        self.setMinimumWidth(400)
+        
+        layout = QVBoxLayout(self)
+        
+        # Total Memory
+        mem_layout = QHBoxLayout()
+        mem_layout.addWidget(QLabel("Total Memory Size:"))
+        self.total_mem_input = QSpinBox()
+        self.total_mem_input.setMaximum(9999999)
+        self.total_mem_input.setMinimum(1)
+        self.total_mem_input.setValue(1000)
+        mem_layout.addWidget(self.total_mem_input)
+        layout.addLayout(mem_layout)
+        
+        # Hole Input
+        hole_layout = QHBoxLayout()
+        hole_layout.addWidget(QLabel("Start:"))
+        self.hole_start_input = QSpinBox()
+        self.hole_start_input.setMaximum(9999999)
+        hole_layout.addWidget(self.hole_start_input)
+        
+        hole_layout.addWidget(QLabel("Size:"))
+        self.hole_size_input = QSpinBox()
+        self.hole_size_input.setMaximum(9999999)
+        self.hole_size_input.setMinimum(1)
+        hole_layout.addWidget(self.hole_size_input)
+        
+        add_hole_btn = QPushButton("Add Hole")
+        add_hole_btn.clicked.connect(self.add_hole)
+        hole_layout.addWidget(add_hole_btn)
+        
+        layout.addLayout(hole_layout)
+        
+        # Holes Table
+        self.table = QTableWidget(0, 2)
+        self.table.setHorizontalHeaderLabels(["Start", "Size"])
+        self.table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.table.horizontalHeader().setStretchLastSection(True)
+        layout.addWidget(self.table)
+        
+        # Buttons
+        btn_layout = QHBoxLayout()
+        ok_btn = QPushButton("OK")
+        ok_btn.clicked.connect(self.accept)
+        cancel_btn = QPushButton("Cancel")
+        cancel_btn.clicked.connect(self.reject)
+        btn_layout.addStretch()
+        btn_layout.addWidget(ok_btn)
+        btn_layout.addWidget(cancel_btn)
+        
+        layout.addLayout(btn_layout)
+        
+    def add_hole(self) -> None:
+        start = self.hole_start_input.value()
+        size = self.hole_size_input.value()
+            
+        row = self.table.rowCount()
+        self.table.insertRow(row)
+        self.table.setItem(row, 0, QTableWidgetItem(str(start)))
+        self.table.setItem(row, 1, QTableWidgetItem(str(size)))
+        
+        self.hole_start_input.setValue(start + size)
+        
+    def get_simulation_data(self) -> Optional[Tuple[int, List[Hole]]]:
+        total_size = self.total_mem_input.value()
+        holes = []
+        for row in range(self.table.rowCount()):
+            item0 = self.table.item(row, 0)
+            item1 = self.table.item(row, 1)
+            if item0 and item1:
+                h_start = int(item0.text())
+                h_size = int(item1.text())
+                holes.append(Hole(h_start, h_size))
+                
+        return total_size, holes
+
+
+class AddProcessDialog(QDialog):
+    def __init__(self, parent=None) -> None:
+        super().__init__(parent)
+        self.setWindowTitle("Add Custom Process")
+        self.setMinimumWidth(400)
+        
+        layout = QVBoxLayout(self)
+        
+        # Process Name
+        pname_layout = QHBoxLayout()
+        pname_layout.addWidget(QLabel("Process Name:"))
+        self.pname_input = QLineEdit()
+        pname_layout.addWidget(self.pname_input)
+        layout.addLayout(pname_layout)
+        
+        # Segment Input
+        seg_layout = QHBoxLayout()
+        seg_layout.addWidget(QLabel("Segment Name:"))
+        self.seg_name_input = QLineEdit()
+        seg_layout.addWidget(self.seg_name_input)
+        
+        seg_layout.addWidget(QLabel("Size:"))
+        self.seg_size_input = QSpinBox()
+        self.seg_size_input.setMaximum(999999)
+        self.seg_size_input.setMinimum(1)
+        seg_layout.addWidget(self.seg_size_input)
+        
+        add_seg_btn = QPushButton("Add Segment")
+        add_seg_btn.clicked.connect(self.add_segment)
+        seg_layout.addWidget(add_seg_btn)
+        
+        layout.addLayout(seg_layout)
+        
+        # Segments Table
+        self.table = QTableWidget(0, 2)
+        self.table.setHorizontalHeaderLabels(["Name", "Size"])
+        self.table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.table.horizontalHeader().setStretchLastSection(True)
+        layout.addWidget(self.table)
+        
+        # Buttons
+        btn_layout = QHBoxLayout()
+        ok_btn = QPushButton("OK")
+        ok_btn.clicked.connect(self.accept)
+        cancel_btn = QPushButton("Cancel")
+        cancel_btn.clicked.connect(self.reject)
+        btn_layout.addStretch()
+        btn_layout.addWidget(ok_btn)
+        btn_layout.addWidget(cancel_btn)
+        
+        layout.addLayout(btn_layout)
+        
+    def add_segment(self) -> None:
+        name = self.seg_name_input.text().strip()
+        size = self.seg_size_input.value()
+        if not name:
+            QMessageBox.warning(self, "Error", "Segment name cannot be empty")
+            return
+            
+        row = self.table.rowCount()
+        self.table.insertRow(row)
+        self.table.setItem(row, 0, QTableWidgetItem(name))
+        self.table.setItem(row, 1, QTableWidgetItem(str(size)))
+        
+        self.seg_name_input.clear()
+        self.seg_size_input.setValue(1)
+        
+    def get_process(self) -> Optional[Process]:
+        name = self.pname_input.text().strip()
+        if not name:
+            QMessageBox.warning(self, "Error", "Process name cannot be empty")
+            return None
+            
+        if self.table.rowCount() == 0:
+            QMessageBox.warning(self, "Error", "Process must have at least one segment")
+            return None
+            
+        segments = []
+        for row in range(self.table.rowCount()):
+            item0 = self.table.item(row, 0)
+            item1 = self.table.item(row, 1)
+            if item0 and item1:
+                seg_name = item0.text()
+                seg_size = int(item1.text())
+                segments.append(Segment(seg_name, seg_size))
+            
+        return Process(name, segments)
+
+
 class MainWindow(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
@@ -235,6 +409,47 @@ class MainWindow(QMainWindow):
         refresh_action = QAction("Refresh", self)
         refresh_action.triggered.connect(self.refresh_view)
         toolbar.addAction(refresh_action)
+        
+        new_sim_action = QAction("New Sim", self)
+        new_sim_action.triggered.connect(self.open_new_sim_dialog)
+        toolbar.addAction(new_sim_action)
+        
+        add_process_action = QAction("Add Process", self)
+        add_process_action.triggered.connect(self.open_add_process_dialog)
+        toolbar.addAction(add_process_action)
+
+    def open_new_sim_dialog(self) -> None:
+        dialog = NewSimulationDialog(self)
+        if dialog.exec():
+            data = dialog.get_simulation_data()
+            if data:
+                total_size, holes = data
+                self.total_size = total_size
+                self.totalSpin.blockSignals(True)
+                self.totalSpin.setValue(total_size)
+                self.totalSpin.blockSignals(False)
+                
+                self.manager = MemoryManager(total_size, holes)
+                self.processes = []
+                self.processPicker.clear()
+                self.activityLog.clear()
+                self.append_log(f"Started new simulation with {total_size} KB and {len(holes)} holes.")
+                self.refresh_view()
+
+    def open_add_process_dialog(self) -> None:
+        dialog = AddProcessDialog(self)
+        if dialog.exec():
+            process = dialog.get_process()
+            if process:
+                # Check if process name already exists
+                if any(p.name == process.name for p in self.processes):
+                    QMessageBox.warning(self, "Error", f"Process '{process.name}' already exists.")
+                    return
+                
+                self.processes.append(process)
+                self.processPicker.addItem(process.name)
+                self.append_log(f"Added custom process '{process.name}' with {len(process.segments)} segments")
+                self.refresh_view()
 
     def _apply_stylesheet(self) -> None:
         style_path = Path(__file__).with_name("styles.qss")

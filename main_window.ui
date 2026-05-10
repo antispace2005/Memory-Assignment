@@ -3,131 +3,99 @@
  <class>MainWindow</class>
  <widget class="QMainWindow" name="mainWindow">
   <property name="windowTitle">
-   <string>Memory Allocation Using Segmentation</string>
+   <string>MemSim Mini</string>
   </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1320</width>
-    <height>860</height>
+    <width>750</width>
+    <height>500</height>
    </rect>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="rootLayout">
     <property name="spacing">
-     <number>14</number>
+     <number>4</number>
     </property>
     <property name="leftMargin">
-     <number>18</number>
+     <number>6</number>
     </property>
     <property name="topMargin">
-     <number>18</number>
+     <number>6</number>
     </property>
     <property name="rightMargin">
-     <number>18</number>
+     <number>6</number>
     </property>
     <property name="bottomMargin">
-     <number>18</number>
+     <number>6</number>
     </property>
     <item>
-     <widget class="QGroupBox" name="heroCard">
-      <layout class="QVBoxLayout" name="heroLayout">
-       <item>
-        <widget class="QLabel" name="headerTitle">
-         <property name="text">
-          <string>Segmentation Memory Simulator</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="headerSubtitle">
-         <property name="text">
-          <string>Allocate and free segments with first-fit or best-fit, while the memory map updates live.</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="statusLabel">
-         <property name="text">
-          <string>Ready to load the sample scenario</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="controlCard">
-      <property name="title">
-       <string>Scenario Controls</string>
+     <widget class="QFrame" name="controlBar">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
       </property>
-      <layout class="QFormLayout" name="controlForm">
-       <item row="0" column="0">
+      <layout class="QHBoxLayout" name="topLayout">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <property name="margin">
+        <number>2</number>
+       </property>
+       <item>
         <widget class="QLabel" name="labelMethod">
          <property name="text">
-          <string>Allocation method</string>
+          <string>Algo:</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QComboBox" name="methodCombo"/>
+       <item>
+        <widget class="QComboBox" name="methodCombo">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
        </item>
-       <item row="1" column="0">
+       <item>
         <widget class="QLabel" name="labelTotal">
          <property name="text">
-          <string>Total memory (K)</string>
+          <string>Mem:</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
+       <item>
         <widget class="QSpinBox" name="totalSpin">
-         <property name="minimum">
-          <number>64</number>
+         <property name="suffix">
+          <string> K</string>
          </property>
          <property name="maximum">
-          <number>100000</number>
+          <number>99999</number>
          </property>
          <property name="value">
           <number>1000</number>
          </property>
         </widget>
        </item>
-       <item row="2" column="0" colspan="2">
+       <item>
+        <spacer name="topSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QPushButton" name="loadButton">
          <property name="text">
-          <string>Load Sample Scenario</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0" colspan="2">
-        <widget class="QPushButton" name="allocateButton">
-         <property name="text">
-          <string>Allocate Next Pending</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="labelProcess">
-         <property name="text">
-          <string>Selected process</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="QComboBox" name="processPicker"/>
-       </item>
-       <item row="5" column="0" colspan="2">
-        <widget class="QPushButton" name="deallocateButton">
-         <property name="text">
-          <string>Deallocate Selected Process</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0" colspan="2">
-        <widget class="QPushButton" name="runButton">
-         <property name="text">
-          <string>Run Full Scenario</string>
+          <string>Load</string>
          </property>
         </widget>
        </item>
@@ -139,21 +107,27 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QWidget" name="leftPanel">
-       <layout class="QVBoxLayout" name="leftPanelLayout">
+      <widget class="QWidget" name="canvasWrapper" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>3</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <layout class="QVBoxLayout" name="canvasLayout">
+        <property name="spacing">
+         <number>4</number>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
         <item>
-         <widget class="QWidget" name="canvasHost">
+         <widget class="QWidget" name="canvasHost" native="true">
+          <property name="styleSheet">
+           <string notr="true">background: #ffffff; border: 1px solid #ccc; border-radius: 2px;</string>
+          </property>
           <layout class="QVBoxLayout" name="canvasHostLayout">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
+           <property name="margin">
             <number>0</number>
            </property>
           </layout>
@@ -161,83 +135,180 @@
         </item>
         <item>
          <widget class="QTextEdit" name="activityLog">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Monospace</family>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
           <property name="readOnly">
            <bool>true</bool>
           </property>
+          <property name="placeholderText">
+           <string>Status logs...</string>
+          </property>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="rightPanel">
-       <layout class="QVBoxLayout" name="rightPanelLayout">
-        <item>
-         <widget class="QGroupBox" name="holesCard">
-          <property name="title">
-           <string>Free Partitions / Holes</string>
-          </property>
-          <layout class="QVBoxLayout" name="holesLayout">
-           <item>
-            <widget class="QTableWidget" name="holesTable">
-             <column>
-              <property name="text">
-               <string>Start</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Size</string>
-              </property>
-             </column>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QGroupBox" name="segmentsCard">
-          <property name="title">
-           <string>Segment Tables</string>
-          </property>
-          <layout class="QVBoxLayout" name="segmentsLayout">
-           <item>
-            <widget class="QTableWidget" name="segmentsTable">
-             <column>
-              <property name="text">
-               <string>Process</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Segment</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Size</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Start</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Status</string>
-              </property>
-             </column>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
+      <widget class="QTabWidget" name="dataTabs">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="tabPosition">
+        <enum>QTabWidget::North</enum>
+       </property>
+       <widget class="QWidget" name="tabHoles">
+        <attribute name="title">
+         <string>Holes</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="holesVLayout">
+         <property name="margin">
+          <number>2</number>
+         </property>
+         <item>
+          <widget class="QTableWidget" name="holesTable">
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <column>
+            <property name="text">
+             <string>Start</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Size</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tabSegs">
+        <attribute name="title">
+         <string>Segs</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="segsVLayout">
+         <property name="margin">
+          <number>2</number>
+         </property>
+         <item>
+          <widget class="QTableWidget" name="segmentsTable">
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+           <column>
+            <property name="text">
+             <string>P</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>S</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Base</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </widget>
     </item>
+    <item>
+     <layout class="QHBoxLayout" name="bottomLayout">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="statusLabel">
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <italic>true</italic>
+         </font>
+        </property>
+        <property name="text">
+         <string>Ready...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="bottomSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="allocateButton">
+        <property name="text">
+         <string>Next</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="runButton">
+        <property name="text">
+         <string>Run All</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="processPicker">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="deallocateButton">
+        <property name="text">
+         <string>Free</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

@@ -1,161 +1,142 @@
+/* --- Main Window & Globals --- */
 QMainWindow#mainWindow {
     background: #0b1020;
     color: #e5eefb;
 }
 
-QGroupBox {
-    border: 1px solid #22314d;
-    border-radius: 16px;
-    margin-top: 12px;
-    padding: 16px;
-    background: #111a2f;
-    color: #e5eefb;
-    font-weight: 600;
-}
-
-QGroupBox::title {
-    subcontrol-origin: margin;
-    subcontrol-position: top left;
-    left: 12px;
-    padding: 0 8px;
-    color: #9bc1ff;
-}
-
-QGroupBox#heroCard {
-    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #15213d, stop: 1 #10192d);
-    border: 1px solid #28406d;
-}
-
-QGroupBox#controlCard {
-    background: #10192d;
-}
-
-QLabel#headerTitle {
-    font-size: 24px;
-    font-weight: 700;
-    color: #f6fbff;
-}
-
-QLabel#headerSubtitle {
+QLabel {
     color: #b7c7e6;
-    font-size: 12px;
+    font-weight: 500;
 }
 
 QLabel#statusLabel {
     color: #89e2b7;
-    font-size: 12px;
     font-weight: 600;
-    padding-top: 4px;
 }
 
+/* --- Control Bar (Top Frame) --- */
+QFrame#controlBar {
+    background: #111a2f;
+    border: 1px solid #22314d;
+    border-radius: 4px;
+}
+
+/* --- Interactive Elements (Inputs & Dropdowns) --- */
 QComboBox,
 QSpinBox {
-    background: #0f172a;
+    background: #09111f;
     color: #e5eefb;
     border: 1px solid #304565;
-    border-radius: 10px;
-    padding: 8px 10px;
-    min-height: 18px;
+    border-radius: 4px;
+    padding: 4px 8px;
+    min-height: 20px;
 }
 
 QComboBox::drop-down {
     border: none;
-    width: 26px;
+    width: 20px;
 }
 
 QComboBox QAbstractItemView {
-    background: #10192d;
+    background: #111a2f;
     color: #e5eefb;
     selection-background-color: #274774;
     border: 1px solid #304565;
 }
 
+/* --- Buttons --- */
 QPushButton {
-    border: none;
-    border-radius: 12px;
-    padding: 10px 14px;
+    border: 1px solid #28406d;
+    border-radius: 4px;
+    padding: 6px 12px;
     font-weight: 600;
     color: #f8fbff;
-    background: #29406e;
+    background: #1d2d4d;
 }
 
 QPushButton:hover {
-    background: #355587;
+    background: #2a406e;
+    border-color: #3b5b9e;
 }
 
 QPushButton:pressed {
-    background: #203557;
+    background: #15213d;
 }
 
-QPushButton#primaryButton {
-    background: #2f7dd1;
-}
-
-QPushButton#primaryButton:hover {
-    background: #4690e1;
-}
-
-QPushButton#accentButton {
-    background: #17a673;
-}
-
-QPushButton#accentButton:hover {
-    background: #1dbb83;
-}
-
+/* --- Activity Log --- */
 QTextEdit#activityLog {
     background: #09111f;
     color: #c8dbf6;
     border: 1px solid #22314d;
-    border-radius: 12px;
-    padding: 10px;
-}
-
-QTableWidget#holesTable,
-QTableWidget#segmentsTable {
-    background: #09111f;
-    alternate-background-color: #0c1425;
-    color: #edf4ff;
-    gridline-color: #21304a;
-    border: 1px solid #22314d;
-    border-radius: 12px;
-}
-
-QTableWidget::item {
+    border-radius: 4px;
     padding: 6px;
 }
 
-QHeaderView::section {
+/* --- Tab Widget (Crucial for Minimal UI) --- */
+QTabWidget::pane {
+    border: 1px solid #22314d;
+    border-radius: 4px;
+    background: #09111f;
+    /* This pulls the pane up to hide the bottom border of the active tab */
+    top: -1px; 
+}
+
+QTabBar::tab {
+    background: #111a2f;
+    color: #b7c7e6;
+    border: 1px solid #22314d;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 4px 12px;
+    margin-right: 2px;
+}
+
+QTabBar::tab:selected {
+    background: #09111f;
+    color: #f6fbff;
+    font-weight: 600;
+    /* Blend the active tab into the pane below it */
+    border-bottom: 1px solid #09111f; 
+}
+
+QTabBar::tab:hover:!selected {
     background: #15213d;
-    color: #dce9fb;
-    padding: 8px 10px;
+}
+
+/* --- Tables --- */
+QTableWidget {
+    background: transparent;
+    alternate-background-color: #0c1425;
+    color: #edf4ff;
+    gridline-color: #21304a;
     border: none;
+}
+
+QTableWidget::item {
+    padding: 4px;
+}
+
+QHeaderView::section {
+    background: #111a2f;
+    color: #9bc1ff;
+    padding: 4px 6px;
+    border: 1px solid #21304a;
+    border-top: none;
+    border-left: none;
     font-weight: 600;
 }
 
 QTableWidget::corner {
-    background: #15213d;
+    background: #111a2f;
 }
 
+/* --- Window Splitter --- */
 QSplitter::handle {
+    background: transparent;
+    width: 6px;
+}
+
+QSplitter::handle:hover {
     background: #22314d;
-}
-
-QToolBar {
-    background: #0f172a;
-    border: none;
-    spacing: 8px;
-    padding: 6px;
-}
-
-QToolButton {
-    background: #1b2944;
-    color: #edf4ff;
-    border: 1px solid #2a4063;
-    border-radius: 8px;
-    padding: 6px 10px;
-}
-
-QToolButton:hover {
-    background: #274165;
 }
