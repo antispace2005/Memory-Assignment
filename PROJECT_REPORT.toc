@@ -1,0 +1,67 @@
+\contentsline {chapter}{\numberline {1}Executive Summary}{4}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Key Objectives}{4}{section.1.1}%
+\contentsline {chapter}{\numberline {2}System Specifications}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Memory Configuration}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Initial Memory Layout}{5}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Allocation Algorithms}{6}{chapter.3}%
+\contentsline {section}{\numberline {3.1}First-Fit Algorithm}{6}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Algorithm Description}{6}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Characteristics}{6}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Best-Fit Algorithm}{6}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Algorithm Description}{6}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Characteristics}{7}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Algorithm Comparison}{7}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Test Case Scenario}{8}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Process Definitions}{8}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Process P1: Multi-Segment Process}{8}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Process P2: Two-Segment Process}{8}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Process P3: Two-Segment Process}{8}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Process P4: Two-Segment Process}{9}{subsection.4.1.4}%
+\contentsline {section}{\numberline {4.2}Operation Sequence}{9}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Required Deliverables}{10}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Screenshots Documentation}{10}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Memory Layout Visualization}{10}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Segment and Hole Tables}{11}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Segment Table}{11}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Free Partitions Table}{11}{subsection.5.3.2}%
+\contentsline {chapter}{\numberline {6}Implementation Details}{12}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Technology Stack}{12}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Core Data Structures}{12}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Process Dataclass}{12}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Segment Dataclass}{13}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Hole Dataclass}{13}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Allocation Method Enum}{13}{subsection.6.2.4}%
+\contentsline {section}{\numberline {6.3}Memory Manager Class}{13}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Class Overview}{13}{subsection.6.3.1}%
+\contentsline {section}{\numberline {6.4}GUI Components}{14}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Main Window}{14}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Custom Canvas Widget}{14}{subsection.6.4.2}%
+\contentsline {chapter}{\numberline {7}Test Results and Analysis}{16}{chapter.7}%
+\contentsline {section}{\numberline {7.1}First-Fit Allocation Scenario}{16}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Step 0: Initial State}{16}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Step 1: Allocate P1 (310K)}{16}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Alternative Interpretation: Spanning Segments}{16}{subsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.1.4}Step 2-5: Subsequent Operations}{17}{subsection.7.1.4}%
+\contentsline {section}{\numberline {7.2}Best-Fit Allocation Scenario}{17}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Comparative Analysis Matrix}{17}{section.7.3}%
+\contentsline {chapter}{\numberline {8}Project Structure}{18}{chapter.8}%
+\contentsline {section}{\numberline {8.1}File Organization}{18}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Dependencies}{19}{section.8.2}%
+\contentsline {chapter}{\numberline {9}Conclusion}{20}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Project Summary}{20}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Key Findings}{20}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Learning Outcomes}{20}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Future Enhancements}{20}{section.9.4}%
+\contentsline {chapter}{\numberline {A}Complete Source Code}{22}{appendix.A}%
+\contentsline {section}{\numberline {A.1}app.py - Main Application}{22}{section.A.1}%
+\contentsline {section}{\numberline {A.2}main\_window.ui - Qt Designer Definition}{22}{section.A.2}%
+\contentsline {section}{\numberline {A.3}styles.qss - External Stylesheet}{22}{section.A.3}%
+\contentsline {chapter}{\numberline {B}Formula Reference}{23}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Memory Calculations}{23}{section.B.1}%
+\contentsline {subsection}{\numberline {B.1.1}Total Process Size}{23}{subsection.B.1.1}%
+\contentsline {subsection}{\numberline {B.1.2}Memory Utilization}{23}{subsection.B.1.2}%
+\contentsline {subsection}{\numberline {B.1.3}External Fragmentation}{23}{subsection.B.1.3}%
+\contentsline {subsection}{\numberline {B.1.4}Waste in Best-Fit}{23}{subsection.B.1.4}%
+\contentsline {chapter}{\numberline {C}Test Case Specification}{24}{appendix.C}%
+\contentsline {section}{\numberline {C.1}Full Test Scenario}{24}{section.C.1}%
+\contentsline {section}{\numberline {C.2}Expected Outcomes}{24}{section.C.2}%
