@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="mainWindow">
+  <property name="windowTitle">
+   <string>Memory Allocation Using Segmentation</string>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1320</width>
+    <height>860</height>
+   </rect>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="rootLayout">
+    <property name="spacing">
+     <number>14</number>
+    </property>
+    <property name="leftMargin">
+     <number>18</number>
+    </property>
+    <property name="topMargin">
+     <number>18</number>
+    </property>
+    <property name="rightMargin">
+     <number>18</number>
+    </property>
+    <property name="bottomMargin">
+     <number>18</number>
+    </property>
+    <item>
+     <widget class="QGroupBox" name="heroCard">
+      <layout class="QVBoxLayout" name="heroLayout">
+       <item>
+        <widget class="QLabel" name="headerTitle">
+         <property name="text">
+          <string>Segmentation Memory Simulator</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="headerSubtitle">
+         <property name="text">
+          <string>Allocate and free segments with first-fit or best-fit, while the memory map updates live.</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="statusLabel">
+         <property name="text">
+          <string>Ready to load the sample scenario</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="controlCard">
+      <property name="title">
+       <string>Scenario Controls</string>
+      </property>
+      <layout class="QFormLayout" name="controlForm">
+       <item row="0" column="0">
+        <widget class="QLabel" name="labelMethod">
+         <property name="text">
+          <string>Allocation method</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="methodCombo"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelTotal">
+         <property name="text">
+          <string>Total memory (K)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QSpinBox" name="totalSpin">
+         <property name="minimum">
+          <number>64</number>
+         </property>
+         <property name="maximum">
+          <number>100000</number>
+         </property>
+         <property name="value">
+          <number>1000</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QPushButton" name="loadButton">
+         <property name="text">
+          <string>Load Sample Scenario</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="2">
+        <widget class="QPushButton" name="allocateButton">
+         <property name="text">
+          <string>Allocate Next Pending</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="labelProcess">
+         <property name="text">
+          <string>Selected process</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QComboBox" name="processPicker"/>
+       </item>
+       <item row="5" column="0" colspan="2">
+        <widget class="QPushButton" name="deallocateButton">
+         <property name="text">
+          <string>Deallocate Selected Process</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" colspan="2">
+        <widget class="QPushButton" name="runButton">
+         <property name="text">
+          <string>Run Full Scenario</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSplitter" name="mainSplitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QWidget" name="leftPanel">
+       <layout class="QVBoxLayout" name="leftPanelLayout">
+        <item>
+         <widget class="QWidget" name="canvasHost">
+          <layout class="QVBoxLayout" name="canvasHostLayout">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="activityLog">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="rightPanel">
+       <layout class="QVBoxLayout" name="rightPanelLayout">
+        <item>
+         <widget class="QGroupBox" name="holesCard">
+          <property name="title">
+           <string>Free Partitions / Holes</string>
+          </property>
+          <layout class="QVBoxLayout" name="holesLayout">
+           <item>
+            <widget class="QTableWidget" name="holesTable">
+             <column>
+              <property name="text">
+               <string>Start</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Size</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="segmentsCard">
+          <property name="title">
+           <string>Segment Tables</string>
+          </property>
+          <layout class="QVBoxLayout" name="segmentsLayout">
+           <item>
+            <widget class="QTableWidget" name="segmentsTable">
+             <column>
+              <property name="text">
+               <string>Process</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Segment</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Size</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Start</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Status</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

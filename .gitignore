@@ -1,0 +1,25 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code settings
+.vscode/
+
+# LaTeX build outputs
+PROJECT_REPORT.aux
+PROJECT_REPORT.fdb_latexmk
+PROJECT_REPORT.fls
+PROJECT_REPORT.log
+PROJECT_REPORT.out
+PROJECT_REPORT.pdf
+PROJECT_REPORT.tex
+PROJECT_REPORT.toc
+
+# Generated screenshots
+screenshots/
+
+
+# PyInstaller build outputs
+dist/
+build/
+*.egg-info/
